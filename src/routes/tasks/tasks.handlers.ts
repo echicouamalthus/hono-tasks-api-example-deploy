@@ -83,18 +83,19 @@ export const patch: AppRouteHandler<PatchRoute> = async (c) => {
 
 export const remove: AppRouteHandler<RemoveRoute> = async (c) => {
   const { id } = c.req.valid("param");
-  // const result = await db.delete(tasks)
-  //   .where(eq(tasks.id, id));
+  const result = await db.delete(tasks)
+    .where(eq(tasks.id, id))
+    .returning();
 
-  // if (result.rowsAffected === 0) {
-  //   return c.json(
-  //     {
-  //       message: HttpStatusPhrases.NOT_FOUND,
-  //     },
-  //     HttpStatusCodes.NOT_FOUND,
-  //   );
-  // }
+  if (result.length === 0) {
+    return c.json(
+      {
+        message: HttpStatusPhrases.NOT_FOUND,
+      },
+      HttpStatusCodes.NOT_FOUND,
+    );
+  }
 
-  // return c.body(null, HttpStatusCodes.NO_CONTENT);
-  return c.json({ id });
+  return c.body(null, HttpStatusCodes.NO_CONTENT);
+  // return c.json({ id });
 };
