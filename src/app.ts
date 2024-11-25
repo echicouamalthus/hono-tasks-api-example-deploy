@@ -8,7 +8,7 @@ const app = createApp();
 configureOpenAPI(app);
 
 const routes = [
-  // index,
+  index,
   tasks,
 ] as const;
 

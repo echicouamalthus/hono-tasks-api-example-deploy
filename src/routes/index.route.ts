@@ -1,5 +1,4 @@
 import { createRoute } from "@hono/zod-openapi";
-// import { Hono } from "hono";
 import * as HttpStatusCodes from "stoker/http-status-codes";
 import { jsonContent } from "stoker/openapi/helpers";
 import { createMessageObjectSchema } from "stoker/openapi/schemas";
@@ -22,15 +21,9 @@ const router = createRouter()
     }),
     (c) => {
       return c.json({
-        message: "Tasks API",
+        message: `Bienvenu dans Task API. Voici le lien pour la documentation api <${env.DEPLOY_URL}/reference>`,
       }, HttpStatusCodes.OK);
     },
   );
-
-// const app = new Hono();
-
-// app.get("/", (c) => {
-//   return c.json({ message: `Voici le lien pour la documentation api. <${env.DEPLOY_URL}/reference>` });
-// });
 
 export default router;
